@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Benim İlk Ticari Web Sitem</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 40px;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #1a365d;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .nav-logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: #3182ce;
+        }
+        h1 {
+            color: #1a365d;
+            font-size: 32px;
+            border-bottom: 3px solid #3182ce;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c5282;
+            margin-top: 30px;
+        }
+        ul {
+            background: white;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        li {
+            margin-bottom: 10px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .gonder-butonu {
+            background-color: #38a169;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .gonder-butonu:hover {
+            background-color: #2f855a;
+        }
+        .gizli-mesaj {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #c6f6d5;
+            color: #22543d;
+            border-radius: 6px;
+            font-weight: 500;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            body { margin: 15px; }
+            h1 { font-size: 24px; }
+            .gonder-butonu { width: 100%; }
+            .navbar { flex-direction: column; gap: 10px; text-align: center; }
+            .nav-links a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="nav-logo">Hacı Yazılım</a>
+        <div class="nav-links">
+            <a href="#">Ana Sayfa</a>
+            <a href="#">Hizmetler</a>
+            <a href="#">İletişim</a>
+        </div>
+    </nav>
+
+    <h1>Yazılım Hizmetleri Ltd. Şti.</h1>
+    <p>Şirketiniz için en kaliteli web sitelerini tasarlıyor ve geliştiriyoruz.</p>
+
+    <h2>Hizmetlerimiz</h2>
+    <ul>
+        <li>Kurumsal Web Sitesi</li>
+        <li>E-Ticaret Entegrasyonu</li>
+        <li>Mobil Uyumlu Tasarım</li>
+    </ul>
+
+    <div class="form-container">
+        <h2>Detaylı Teklif Alın</h2>
+        <form id="teklifFormu" onsubmit="formuGonder(event)">
+            <input type="text" id="musteriAd" placeholder="Adınız Soyadınız" required>
+            <input type="email" id="musteriEposta" placeholder="E-posta Adresiniz" required>
+            <textarea id="musteriProje" placeholder="Projenizden kısaca bahsedin..." rows="4" required></textarea>
+            <button type="submit" class="gonder-butonu">Teklif Talebi Gönder</button>
+        </form>
+        <div id="basariMesaji" class="gizli-mesaj"></div>
+    </div>
+
+    <h2>İletişim</h2>
+    <p>Bize ulaşın: info@yazilimcihaci.com</p>
+
+    <script>
+        function formuGonder(event) {
+            event.preventDefault();
+
+            let ad = document.getElementById("musteriAd").value;
+            let eposta = document.getElementById("musteriEposta").value;
+            let proje = document.getElementById("musteriProje").value;
+            let mesajKutusu = document.getElementById("basariMesaji");
+
+            let formVerisi = {
+                ad: ad,
+                eposta: eposta,
+                proje: proje
+            };
+
+            fetch('http://localhost:3000', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formVerisi)
+            })
+            .then(response => response.json())
+            .then(data => {
+                mesajKutusu.innerHTML = "Teşekkürler Sayın <strong>" + ad + "</strong>! Talebiniz sistemimize kaydedildi.";
+                mesajKutusu.style.display = "block";
+                document.getElementById("teklifFormu").reset();
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert("Sunucuya bağlanırken bir hata oluştu!");
+            });
+        }
+    </script>
+</body>
+</html>

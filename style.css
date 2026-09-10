@@ -1,0 +1,166 @@
+
+.navbar {
+    background-color: #1a365d;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.nav-logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #e2e8f0;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #3182ce;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 40px;
+    padding: 0;
+}
+
+
+h1 {
+    color: #1a365d;
+    font-size: 32px;
+    border-bottom: 3px solid #3182ce;
+    padding-bottom: 10px;
+}
+
+
+h2 {
+    color: #2c5282;
+    margin-top: 30px;
+}
+
+
+ul {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+li {
+    margin-bottom: 10px;
+    color: #4a5568;
+    font-weight: 500;
+}
+.teklif-butonu {
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+
+.teklif-butonu:hover {
+    background-color: #2c5282;
+}
+
+.header-img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    text-align: center;
+}
+
+
+@media (max-width: 600px) {
+    body {
+        margin: 15px; 
+    }
+    
+    h1 {
+        font-size: 24px; 
+    }
+    
+    .teklif-butonu {
+        width: 100%; 
+    }
+    .navbar {
+        flex-direction: column; 
+        gap: 10px;
+        text-align: center;
+    }
+    .nav-links a {
+        margin: 0 10px; 
+    }
+
+} 
+
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.form-container input, .form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box; 
+}
+
+.gonder-butonu {
+    background-color: #38a169; 
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.gonder-butonu:hover {
+    background-color: #2f855a;
+}
+
+
+.gizli-mesaj {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #c6f6d5;
+    color: #22543d;
+    border-radius: 6px;
+    font-weight: 500;
+    text-align: center;
+}
