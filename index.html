@@ -112,10 +112,13 @@
     <nav class="navbar">
         <a href="#" class="nav-logo">Hacı Yazılım</a>
         <div class="nav-links">
-            <a href="#">Ana Sayfa</a>
-            <a href="#">Hizmetler</a>
-            <a href="#">İletişim</a>
-        </div>
+    <a href="#">Ana Sayfa</a>
+    <a href="#">Hizmetler</a>
+    <a href="#">İletişim</a>
+    <a href="#" id="girisLinki" onclick="formGoster('girisForm')">Giriş Yap</a>
+<a href="#" id="kayitLinki" onclick="formGoster('kayitForm')">Kayıt Ol</a>
+<a href="#" id="cikisLinki" onclick="cikisYap()" style="display:none;">Çıkış Yap</a>
+</div>
     </nav>
 
     <h1>Yazılım Hizmetleri Ltd. Şti.</h1>
@@ -127,7 +130,22 @@
         <li>E-Ticaret Entegrasyonu</li>
         <li>Mobil Uyumlu Tasarım</li>
     </ul>
+<div class="form-container" id="kayitForm" style="display:none;">
+    <h2>Kayıt Ol</h2>
+    <input type="text" id="kayitKullaniciAdi" placeholder="Kullanıcı Adı" required>
+    <input type="email" id="kayitEposta" placeholder="E-posta Adresiniz" required>
+    <input type="password" id="kayitSifre" placeholder="Şifre" required>
+    <button class="gonder-butonu" onclick="kayitOl()">Kayıt Ol</button>
+    <div id="kayitMesaji" class="gizli-mesaj"></div>
+</div>
 
+<div class="form-container" id="girisForm" style="display:none;">
+    <h2>Giriş Yap</h2>
+    <input type="email" id="girisEposta" placeholder="E-posta Adresiniz" required>
+    <input type="password" id="girisSifre" placeholder="Şifre" required>
+    <button class="gonder-butonu" onclick="girisYap()">Giriş Yap</button>
+    <div id="girisMesaji" class="gizli-mesaj"></div>
+</div>
     <div class="form-container">
         <h2>Detaylı Teklif Alın</h2>
         <form id="teklifFormu" onsubmit="formuGonder(event)">
@@ -143,6 +161,75 @@
     <p>Bize ulaşın: info@yazilimcihaci.com</p>
 
     <script>
+        function formGoster(formId) {
+    document.getElementById('kayitForm').style.display = 'none';
+    document.getElementById('girisForm').style.display = 'none';
+    document.getElementById(formId).style.display = 'block';
+}
+
+function kayitOl() {
+    let kullaniciAdi = document.getElementById("kayitKullaniciAdi").value;
+    let eposta = document.getElementById("kayitEposta").value;
+    let sifre = document.getElementById("kayitSifre").value;
+    let mesajKutusu = document.getElementById("kayitMesaji");
+
+    fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kullaniciAdi: kullaniciAdi, eposta: eposta, sifre: sifre })
+    })
+    .then(response => response.json())
+    .then(data => {
+        mesajKutusu.style.display = "block";
+        if (data.mesaj) {
+            mesajKutusu.innerHTML = data.mesaj + " Şimdi giriş yapabilirsiniz.";
+        } else {
+            mesajKutusu.innerHTML = data.hata;
+        }
+    })
+    .catch(error => {
+        console.error('Hata:', error);
+        alert("Sunucuya bağlanırken bir hata oluştu!");
+    });
+}
+
+function girisYap() {
+    let eposta = document.getElementById("girisEposta").value;
+    let sifre = document.getElementById("girisSifre").value;
+    let mesajKutusu = document.getElementById("girisMesaji");
+
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ eposta: eposta, sifre: sifre })
+    })
+    .then(response => response.json())
+    .then(data => {
+        mesajKutusu.style.display = "block";
+        if (data.token) {
+            localStorage.setItem('token', data.token);
+            mesajKutusu.innerHTML = "Giriş başarılı! Hoş geldin.";
+            document.getElementById('girisForm').style.display = 'none';
+document.getElementById('cikisLinki').style.display = 'inline';
+document.getElementById('girisLinki').style.display = 'none';
+document.getElementById('kayitLinki').style.display = 'none';
+        } else {
+            mesajKutusu.innerHTML = data.hata;
+        }
+    })
+    .catch(error => {
+        console.error('Hata:', error);
+        alert("Sunucuya bağlanırken bir hata oluştu!");
+    });
+}
+
+function cikisYap() {
+    localStorage.removeItem('token');
+    document.getElementById('cikisLinki').style.display = 'none';
+    document.getElementById('girisLinki').style.display = 'inline';
+    document.getElementById('kayitLinki').style.display = 'inline';
+    alert("Çıkış yapıldı.");
+}
         function formuGonder(event) {
             event.preventDefault();
 

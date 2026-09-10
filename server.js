@@ -8,6 +8,7 @@ require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('./User');
+const tokenKontrol = require('./authMiddleware');
 app.use(express.json());
 
 const mongoURI = process.env.MONGO_URI;
@@ -89,7 +90,9 @@ app.post('/', async (req, res) => {
         res.status(500).json({ hata: 'Veritabanina kaydetme hatasi' });
     }
 });
-
+app.get('/profil', tokenKontrol, (req, res) => {
+    res.status(200).json({ mesaj: 'Bu korumalı bir alan, token doğrulandı!', kullanici: req.kullanici });
+});
 app.listen(port, () => {
     console.log(`Express Sunucusu Aktif! Adres: http://localhost:${port}`);
 });
