@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 const User = require('./User');
 const tokenKontrol = require('./authMiddleware');
 app.use(express.json());
-
+app.use(express.static(__dirname));
 const mongoURI = process.env.MONGO_URI;
 
 mongoose.connect(mongoURI)

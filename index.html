@@ -2,243 +2,206 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Benim İlk Ticari Web Sitem</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            margin: 40px;
-            padding: 0;
-        }
-        .navbar {
-            background-color: #1a365d;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        .nav-logo {
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .nav-links a {
-            color: #e2e8f0;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .nav-links a:hover {
-            color: #3182ce;
-        }
-        h1 {
-            color: #1a365d;
-            font-size: 32px;
-            border-bottom: 3px solid #3182ce;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #2c5282;
-            margin-top: 30px;
-        }
-        ul {
-            background: white;
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-        li {
-            margin-bottom: 10px;
-            color: #4a5568;
-            font-weight: 500;
-        }
-        .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-        .form-container input, .form-container textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        .gonder-butonu {
-            background-color: #38a169;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.3s;
-        }
-        .gonder-butonu:hover {
-            background-color: #2f855a;
-        }
-        .gizli-mesaj {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #c6f6d5;
-            color: #22543d;
-            border-radius: 6px;
-            font-weight: 500;
-            text-align: center;
-        }
-        @media (max-width: 600px) {
-            body { margin: 15px; }
-            h1 { font-size: 24px; }
-            .gonder-butonu { width: 100%; }
-            .navbar { flex-direction: column; gap: 10px; text-align: center; }
-            .nav-links a { margin: 0 10px; }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÇAKIR Yazılım</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="#" class="nav-logo">Hacı Yazılım</a>
-        <div class="nav-links">
-    <a href="#">Ana Sayfa</a>
-    <a href="#">Hizmetler</a>
-    <a href="#">İletişim</a>
-    <a href="#" id="girisLinki" onclick="formGoster('girisForm')">Giriş Yap</a>
-<a href="#" id="kayitLinki" onclick="formGoster('kayitForm')">Kayıt Ol</a>
-<a href="#" id="cikisLinki" onclick="cikisYap()" style="display:none;">Çıkış Yap</a>
-</div>
+        <div class="wrap">
+           <a href="#" class="nav-logo">ÇAKIR<span>.</span>Yazılım</a>
+            <div class="nav-links">
+                <a href="#hizmetler">Hizmetler</a>
+                <a href="#teklif">Teklif Al</a>
+                <a href="#" id="girisLinki" class="cta-link" onclick="formGoster('girisForm')">Giriş Yap</a>
+                <a href="#" id="kayitLinki" onclick="formGoster('kayitForm')">Kayıt Ol</a>
+                <a href="#" id="cikisLinki" onclick="cikisYap()" style="display:none;">Çıkış Yap</a>
+            </div>
+        </div>
     </nav>
 
-    <h1>Yazılım Hizmetleri Ltd. Şti.</h1>
-    <p>Şirketiniz için en kaliteli web sitelerini tasarlıyor ve geliştiriyoruz.</p>
+    <section class="hero" style="border-top: none;">
+        <div class="wrap">
+            <div>
+                <h1>Fikrini çalışan<br>bir yazılıma dönüştürüyoruz.</h1>
+                <p>Samsun merkezli, küresel standartlarda web uygulamaları geliştiren bir yazılım stüdyosuyuz. Fikrinizi anlatın, biz kodlayalım.</p>
+                <a href="#teklif" class="btn-primary">Teklif İste</a>
+            </div>
+            <div class="terminal">
+                <div class="terminal-bar">
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                    <div class="terminal-dot"></div>
+                </div>
+                <div class="terminal-body">
+                    <div class="line"><span class="t-com">// yeni proje başlatılıyor</span></div>
+                    <div class="line"><span class="t-key">const</span> proje = {</div>
+                    <div class="line">&nbsp;&nbsp;musteri: <span class="t-str">"sen"</span>,</div>
+                    <div class="line">&nbsp;&nbsp;durum: <span class="t-str">"gelistiriliyor"</span>,</div>
+                    <div class="line">&nbsp;&nbsp;teslim: <span class="t-str">"zamaninda"</span></div>
+                    <div class="line">};<span class="cursor"></span></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <h2>Hizmetlerimiz</h2>
-    <ul>
-        <li>Kurumsal Web Sitesi</li>
-        <li>E-Ticaret Entegrasyonu</li>
-        <li>Mobil Uyumlu Tasarım</li>
-    </ul>
-<div class="form-container" id="kayitForm" style="display:none;">
-    <h2>Kayıt Ol</h2>
-    <input type="text" id="kayitKullaniciAdi" placeholder="Kullanıcı Adı" required>
-    <input type="email" id="kayitEposta" placeholder="E-posta Adresiniz" required>
-    <input type="password" id="kayitSifre" placeholder="Şifre" required>
-    <button class="gonder-butonu" onclick="kayitOl()">Kayıt Ol</button>
-    <div id="kayitMesaji" class="gizli-mesaj"></div>
-</div>
+    <section id="hizmetler">
+        <div class="wrap">
+            <h2 class="section-head">Hizmetlerimiz</h2>
+            <p class="section-sub">İhtiyacınıza göre şekillenen, uçtan uca yazılım çözümleri.</p>
+            <div class="service-list">
+                <div class="service-row">
+                    <div>
+                        <h3>Kurumsal Web Sitesi</h3>
+                        <p>Şirketinizi doğru şekilde temsil eden, hızlı ve mobil uyumlu kurumsal siteler.</p>
+                    </div>
+                    <div class="service-tag">frontend + backend</div>
+                </div>
+                <div class="service-row">
+                    <div>
+                        <h3>E-Ticaret Entegrasyonu</h3>
+                        <p>Ürünlerinizi satışa hazır, güvenli ödeme altyapılı bir mağazaya taşıyoruz.</p>
+                    </div>
+                    <div class="service-tag">node.js + mongodb</div>
+                </div>
+                <div class="service-row">
+                    <div>
+                        <h3>Özel Web Uygulamaları</h3>
+                        <p>Kullanıcı girişi, veritabanı ve gerçek iş mantığı olan tam kapsamlı uygulamalar.</p>
+                    </div>
+                    <div class="service-tag">full-stack</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="form-container" id="girisForm" style="display:none;">
-    <h2>Giriş Yap</h2>
-    <input type="email" id="girisEposta" placeholder="E-posta Adresiniz" required>
-    <input type="password" id="girisSifre" placeholder="Şifre" required>
-    <button class="gonder-butonu" onclick="girisYap()">Giriş Yap</button>
-    <div id="girisMesaji" class="gizli-mesaj"></div>
-</div>
-    <div class="form-container">
-        <h2>Detaylı Teklif Alın</h2>
-        <form id="teklifFormu" onsubmit="formuGonder(event)">
-            <input type="text" id="musteriAd" placeholder="Adınız Soyadınız" required>
-            <input type="email" id="musteriEposta" placeholder="E-posta Adresiniz" required>
-            <textarea id="musteriProje" placeholder="Projenizden kısaca bahsedin..." rows="4" required></textarea>
-            <button type="submit" class="gonder-butonu">Teklif Talebi Gönder</button>
-        </form>
-        <div id="basariMesaji" class="gizli-mesaj"></div>
+    <section id="teklif">
+        <div class="wrap">
+            <h2 class="section-head">Detaylı Teklif Alın</h2>
+            <p class="section-sub">Projenizi kısaca anlatın, size özel bir teklifle dönüş yapalım.</p>
+            <div class="panel">
+                <form id="teklifFormu" onsubmit="formuGonder(event)">
+                    <input type="text" id="musteriAd" placeholder="Adınız Soyadınız" required>
+                    <input type="email" id="musteriEposta" placeholder="E-posta Adresiniz" required>
+                    <textarea id="musteriProje" placeholder="Projenizden kısaca bahsedin..." rows="4" required></textarea>
+                    <button type="submit" class="panel-btn">Teklif Talebi Gönder</button>
+                </form>
+                <div id="basariMesaji" class="mesaj-kutusu"></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="wrap contact-row">
+            <h2 class="section-head" style="margin:0;">İletişim</h2>
+            <a href="mailto:info@cakiryazilim.com" class="contact-email">info@cakiryazilim.com</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="wrap">ÇAKIR Yazılım — Samsun</div>
+    </footer>
+
+    <div class="panel" id="kayitForm">
+        <h2>Kayıt Ol</h2>
+        <input type="text" id="kayitKullaniciAdi" placeholder="Kullanıcı Adı" required>
+        <input type="email" id="kayitEposta" placeholder="E-posta Adresiniz" required>
+        <input type="password" id="kayitSifre" placeholder="Şifre" required>
+        <button class="panel-btn" onclick="kayitOl()">Kayıt Ol</button>
+        <div id="kayitMesaji" class="mesaj-kutusu"></div>
     </div>
 
-    <h2>İletişim</h2>
-    <p>Bize ulaşın: info@yazilimcihaci.com</p>
+    <div class="panel" id="girisForm">
+        <h2>Giriş Yap</h2>
+        <input type="email" id="girisEposta" placeholder="E-posta Adresiniz" required>
+        <input type="password" id="girisSifre" placeholder="Şifre" required>
+        <button class="panel-btn" onclick="girisYap()">Giriş Yap</button>
+        <div id="girisMesaji" class="mesaj-kutusu"></div>
+    </div>
 
     <script>
         function formGoster(formId) {
-    document.getElementById('kayitForm').style.display = 'none';
-    document.getElementById('girisForm').style.display = 'none';
-    document.getElementById(formId).style.display = 'block';
-}
-
-function kayitOl() {
-    let kullaniciAdi = document.getElementById("kayitKullaniciAdi").value;
-    let eposta = document.getElementById("kayitEposta").value;
-    let sifre = document.getElementById("kayitSifre").value;
-    let mesajKutusu = document.getElementById("kayitMesaji");
-
-    fetch('http://localhost:3000/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ kullaniciAdi: kullaniciAdi, eposta: eposta, sifre: sifre })
-    })
-    .then(response => response.json())
-    .then(data => {
-        mesajKutusu.style.display = "block";
-        if (data.mesaj) {
-            mesajKutusu.innerHTML = data.mesaj + " Şimdi giriş yapabilirsiniz.";
-        } else {
-            mesajKutusu.innerHTML = data.hata;
+            document.getElementById('kayitForm').classList.remove('acik');
+            document.getElementById('girisForm').classList.remove('acik');
+            document.getElementById(formId).classList.add('acik');
         }
-    })
-    .catch(error => {
-        console.error('Hata:', error);
-        alert("Sunucuya bağlanırken bir hata oluştu!");
-    });
-}
 
-function girisYap() {
-    let eposta = document.getElementById("girisEposta").value;
-    let sifre = document.getElementById("girisSifre").value;
-    let mesajKutusu = document.getElementById("girisMesaji");
+        function kayitOl() {
+            let kullaniciAdi = document.getElementById("kayitKullaniciAdi").value;
+            let eposta = document.getElementById("kayitEposta").value;
+            let sifre = document.getElementById("kayitSifre").value;
+            let mesajKutusu = document.getElementById("kayitMesaji");
 
-    fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ eposta: eposta, sifre: sifre })
-    })
-    .then(response => response.json())
-    .then(data => {
-        mesajKutusu.style.display = "block";
-        if (data.token) {
-            localStorage.setItem('token', data.token);
-            mesajKutusu.innerHTML = "Giriş başarılı! Hoş geldin.";
-            document.getElementById('girisForm').style.display = 'none';
-document.getElementById('cikisLinki').style.display = 'inline';
-document.getElementById('girisLinki').style.display = 'none';
-document.getElementById('kayitLinki').style.display = 'none';
-        } else {
-            mesajKutusu.innerHTML = data.hata;
+            fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ kullaniciAdi: kullaniciAdi, eposta: eposta, sifre: sifre })
+            })
+            .then(response => response.json())
+            .then(data => {
+                mesajKutusu.classList.add("acik");
+                if (data.mesaj) {
+                    mesajKutusu.innerHTML = data.mesaj + " Şimdi giriş yapabilirsiniz.";
+                } else {
+                    mesajKutusu.innerHTML = data.hata;
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert("Sunucuya bağlanırken bir hata oluştu!");
+            });
         }
-    })
-    .catch(error => {
-        console.error('Hata:', error);
-        alert("Sunucuya bağlanırken bir hata oluştu!");
-    });
-}
 
-function cikisYap() {
-    localStorage.removeItem('token');
-    document.getElementById('cikisLinki').style.display = 'none';
-    document.getElementById('girisLinki').style.display = 'inline';
-    document.getElementById('kayitLinki').style.display = 'inline';
-    alert("Çıkış yapıldı.");
-}
+        function girisYap() {
+            let eposta = document.getElementById("girisEposta").value;
+            let sifre = document.getElementById("girisSifre").value;
+            let mesajKutusu = document.getElementById("girisMesaji");
 
-window.onload = function() {
-    let token = localStorage.getItem('token');
-    if (token) {
-        document.getElementById('cikisLinki').style.display = 'inline';
-        document.getElementById('girisLinki').style.display = 'none';
-        document.getElementById('kayitLinki').style.display = 'none';
-    }
-};
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ eposta: eposta, sifre: sifre })
+            })
+            .then(response => response.json())
+            .then(data => {
+                mesajKutusu.classList.add("acik");
+                if (data.token) {
+                    localStorage.setItem('token', data.token);
+                    mesajKutusu.innerHTML = "Giriş başarılı! Hoş geldin.";
+                    document.getElementById('girisForm').classList.remove('acik');
+                    document.getElementById('cikisLinki').style.display = 'inline';
+                    document.getElementById('girisLinki').style.display = 'none';
+                    document.getElementById('kayitLinki').style.display = 'none';
+                } else {
+                    mesajKutusu.innerHTML = data.hata;
+                }
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                alert("Sunucuya bağlanırken bir hata oluştu!");
+            });
+        }
+
+        function cikisYap() {
+            localStorage.removeItem('token');
+            document.getElementById('cikisLinki').style.display = 'none';
+            document.getElementById('girisLinki').style.display = 'inline';
+            document.getElementById('kayitLinki').style.display = 'inline';
+            alert("Çıkış yapıldı.");
+        }
+
+        window.onload = function() {
+            let token = localStorage.getItem('token');
+            if (token) {
+                document.getElementById('cikisLinki').style.display = 'inline';
+                document.getElementById('girisLinki').style.display = 'none';
+                document.getElementById('kayitLinki').style.display = 'none';
+            }
+        };
+
         function formuGonder(event) {
             event.preventDefault();
 
@@ -247,7 +210,7 @@ window.onload = function() {
             let proje = document.getElementById("musteriProje").value;
             let mesajKutusu = document.getElementById("basariMesaji");
 
-                        let formVerisi = {
+            let formVerisi = {
                 ad: ad,
                 eposta: eposta,
                 proje: proje
@@ -264,22 +227,52 @@ window.onload = function() {
                 body: JSON.stringify(formVerisi)
             })
             .then(response => response.json().then(data => ({ status: response.status, data })))
-.then(({ status, data }) => {
-    mesajKutusu.style.display = "block";
-    if (status === 401) {
-        mesajKutusu.innerHTML = "Teklif gönderebilmek için önce giriş yapmalısınız.";
-    } else if (status === 200) {
-        mesajKutusu.innerHTML = "Teşekkürler Sayın <strong>" + ad + "</strong>! Talebiniz sistemimize kaydedildi.";
-        document.getElementById("teklifFormu").reset();
-    } else {
-        mesajKutusu.innerHTML = data.hata || "Bir hata oluştu.";
-    }
-})
+            .then(({ status, data }) => {
+                mesajKutusu.classList.add("acik");
+                if (status === 401) {
+                    mesajKutusu.innerHTML = "Teklif gönderebilmek için önce giriş yapmalısınız.";
+                } else if (status === 200) {
+                    mesajKutusu.innerHTML = "Teşekkürler Sayın <strong>" + ad + "</strong>! Talebiniz sistemimize kaydedildi.";
+                    document.getElementById("teklifFormu").reset();
+                } else {
+                    mesajKutusu.innerHTML = data.hata || "Bir hata oluştu.";
+                }
+            })
             .catch(error => {
                 console.error('Hata:', error);
                 alert("Sunucuya bağlanırken bir hata oluştu!");
             });
         }
+        function yumusakKaydir(hedefId, sure) {
+    const hedef = document.querySelector(hedefId);
+    const baslangic = window.pageYOffset;
+    const hedefKonum = hedef.getBoundingClientRect().top + baslangic;
+    const mesafe = hedefKonum - baslangic;
+    let baslangicZamani = null;
+
+    function easeIn(t) { return t * t * t; }
+
+    function adim(zaman) {
+        if (!baslangicZamani) baslangicZamani = zaman;
+        const gecenSure = zaman - baslangicZamani;
+        const ilerleme = Math.min(gecenSure / sure, 1);
+        window.scrollTo(0, baslangic + mesafe * easeIn(ilerleme));
+        if (gecenSure < sure) {
+            requestAnimationFrame(adim);
+        }
+    }
+    requestAnimationFrame(adim);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const hedefId = this.getAttribute('href');
+        if (hedefId.length > 1 && document.querySelector(hedefId)) {
+            e.preventDefault();
+            yumusakKaydir(hedefId, 900);
+        }
+    });
+});
     </script>
 </body>
 </html>
