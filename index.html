@@ -136,7 +136,7 @@
             let sifre = document.getElementById("kayitSifre").value;
             let mesajKutusu = document.getElementById("kayitMesaji");
 
-            fetch('http://localhost:3000/register', {
+            fetch('/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ kullaniciAdi: kullaniciAdi, eposta: eposta, sifre: sifre })
@@ -161,7 +161,7 @@
             let sifre = document.getElementById("girisSifre").value;
             let mesajKutusu = document.getElementById("girisMesaji");
 
-            fetch('http://localhost:3000/login', {
+            fetch('/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ eposta: eposta, sifre: sifre })
@@ -221,7 +221,7 @@
 
             let token = localStorage.getItem('token');
 
-            fetch('http://localhost:3000', {
+            fetch('/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

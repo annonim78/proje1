@@ -39,7 +39,7 @@
             window.location.href = 'index.html';
         }
 
-        fetch('http://localhost:3000/tekliflerim', {
+        fetch('/tekliflerim', {
             headers: { 'Authorization': 'Bearer ' + token }
         })
         .then(response => response.json())
