@@ -32,7 +32,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-    try {
+    try {if (!req.body.kullaniciAdi || !req.body.eposta || !req.body.sifre) {
+    return res.status(400).json({ hata: 'Tüm alanları doldurmalısınız' });
+}
+if (req.body.sifre.length < 6) {
+    return res.status(400).json({ hata: 'Şifre en az 6 karakter olmalı' });
+}
         const varOlanKullanici = await User.findOne({ eposta: req.body.eposta });
         if (varOlanKullanici) {
             return res.status(400).json({ hata: 'Bu eposta zaten kayıtlı' });
@@ -54,7 +59,9 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-    try {
+    try {if (!req.body.eposta || !req.body.sifre) {
+    return res.status(400).json({ hata: 'E-posta ve şifre gerekli' });
+}
         const kullanici = await User.findOne({ eposta: req.body.eposta });
         if (!kullanici) {
             return res.status(400).json({ hata: 'Eposta veya şifre hatalı' });
@@ -78,7 +85,9 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/', tokenKontrol, async (req, res) => {
-    try {
+    try {if (!req.body.ad || !req.body.eposta || !req.body.proje) {
+    return res.status(400).json({ hata: 'Tüm alanları doldurmalısınız' });
+}
         const yeniTeklif = new Teklif({
             ad: req.body.ad,
             eposta: req.body.eposta,
