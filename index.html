@@ -230,6 +230,15 @@ function cikisYap() {
     document.getElementById('kayitLinki').style.display = 'inline';
     alert("Çıkış yapıldı.");
 }
+
+window.onload = function() {
+    let token = localStorage.getItem('token');
+    if (token) {
+        document.getElementById('cikisLinki').style.display = 'inline';
+        document.getElementById('girisLinki').style.display = 'none';
+        document.getElementById('kayitLinki').style.display = 'none';
+    }
+};
         function formuGonder(event) {
             event.preventDefault();
 
@@ -238,25 +247,34 @@ function cikisYap() {
             let proje = document.getElementById("musteriProje").value;
             let mesajKutusu = document.getElementById("basariMesaji");
 
-            let formVerisi = {
+                        let formVerisi = {
                 ad: ad,
                 eposta: eposta,
                 proje: proje
             };
 
+            let token = localStorage.getItem('token');
+
             fetch('http://localhost:3000', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
                 },
                 body: JSON.stringify(formVerisi)
             })
-            .then(response => response.json())
-            .then(data => {
-                mesajKutusu.innerHTML = "Teşekkürler Sayın <strong>" + ad + "</strong>! Talebiniz sistemimize kaydedildi.";
-                mesajKutusu.style.display = "block";
-                document.getElementById("teklifFormu").reset();
-            })
+            .then(response => response.json().then(data => ({ status: response.status, data })))
+.then(({ status, data }) => {
+    mesajKutusu.style.display = "block";
+    if (status === 401) {
+        mesajKutusu.innerHTML = "Teklif gönderebilmek için önce giriş yapmalısınız.";
+    } else if (status === 200) {
+        mesajKutusu.innerHTML = "Teşekkürler Sayın <strong>" + ad + "</strong>! Talebiniz sistemimize kaydedildi.";
+        document.getElementById("teklifFormu").reset();
+    } else {
+        mesajKutusu.innerHTML = data.hata || "Bir hata oluştu.";
+    }
+})
             .catch(error => {
                 console.error('Hata:', error);
                 alert("Sunucuya bağlanırken bir hata oluştu!");

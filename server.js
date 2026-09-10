@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.post('/', async (req, res) => {
+app.post('/', tokenKontrol, async (req, res) => {
     try {
         const yeniTeklif = new Teklif({
             ad: req.body.ad,
