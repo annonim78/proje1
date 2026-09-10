@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panelim - ÇAKIR Yazılım</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="wrap">
+            <a href="index.html" class="nav-logo">ÇAKIR<span>.</span>Yazılım</a>
+            <div class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="#" onclick="cikisYap()">Çıkış Yap</a>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="wrap">
+            <h2 class="section-head">Tekliflerim</h2>
+            <p class="section-sub">Gönderdiğin teklif taleplerinin durumu.</p>
+            <div id="teklifListesi" class="service-list"></div>
+        </div>
+    </section>
+
+    <script>
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        function cikisYap() {
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+        }
+
+        fetch('http://localhost:3000/tekliflerim', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const liste = document.getElementById('teklifListesi');
+            if (!data.length) {
+                liste.innerHTML = '<p class="section-sub">Henüz teklif göndermemişsin.</p>';
+                return;
+            }
+            liste.innerHTML = data.map(t => `
+                <div class="service-row">
+                    <div>
+                        <h3>${t.proje}</h3>
+                        <p>${t.eposta}</p>
+                    </div>
+                    <div class="service-tag">${new Date(t.tarih).toLocaleDateString('tr-TR')}</div>
+                </div>
+            `).join('');
+        })
+        .catch(() => {
+            document.getElementById('teklifListesi').innerHTML = '<p class="section-sub">Teklifler yüklenemedi.</p>';
+        });
+    </script>
+</body>
+</html>

@@ -21,6 +21,7 @@ const TeklifSema = new mongoose.Schema({
     ad: String,
     eposta: String,
     proje: String,
+    kullaniciId: String,
     tarih: { type: Date, default: Date.now }
 });
 
@@ -81,7 +82,8 @@ app.post('/', tokenKontrol, async (req, res) => {
         const yeniTeklif = new Teklif({
             ad: req.body.ad,
             eposta: req.body.eposta,
-            proje: req.body.proje
+            proje: req.body.proje,
+            kullaniciId: req.kullanici.id
         });
 
         await yeniTeklif.save();
@@ -90,9 +92,20 @@ app.post('/', tokenKontrol, async (req, res) => {
         res.status(500).json({ hata: 'Veritabanina kaydetme hatasi' });
     }
 });
+
 app.get('/profil', tokenKontrol, (req, res) => {
     res.status(200).json({ mesaj: 'Bu korumalı bir alan, token doğrulandı!', kullanici: req.kullanici });
 });
+
+app.get('/tekliflerim', tokenKontrol, async (req, res) => {
+    try {
+        const teklifler = await Teklif.find({ kullaniciId: req.kullanici.id }).sort({ tarih: -1 });
+        res.status(200).json(teklifler);
+    } catch (hata) {
+        res.status(500).json({ hata: 'Teklifler getirilemedi' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Express Sunucusu Aktif! Adres: http://localhost:${port}`);
 });

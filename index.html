@@ -19,6 +19,7 @@
                 <a href="#" id="girisLinki" class="cta-link" onclick="formGoster('girisForm')">Giriş Yap</a>
                 <a href="#" id="kayitLinki" onclick="formGoster('kayitForm')">Kayıt Ol</a>
                 <a href="#" id="cikisLinki" onclick="cikisYap()" style="display:none;">Çıkış Yap</a>
+                <a href="panelim.html" id="panelLinki" style="display:none;">Panelim</a>
             </div>
         </div>
     </nav>
@@ -175,6 +176,7 @@
                     document.getElementById('cikisLinki').style.display = 'inline';
                     document.getElementById('girisLinki').style.display = 'none';
                     document.getElementById('kayitLinki').style.display = 'none';
+                    document.getElementById('panelLinki').style.display = 'inline';
                 } else {
                     mesajKutusu.innerHTML = data.hata;
                 }
@@ -194,13 +196,14 @@
         }
 
         window.onload = function() {
-            let token = localStorage.getItem('token');
-            if (token) {
-                document.getElementById('cikisLinki').style.display = 'inline';
-                document.getElementById('girisLinki').style.display = 'none';
-                document.getElementById('kayitLinki').style.display = 'none';
-            }
-        };
+    let token = localStorage.getItem('token');
+    if (token) {
+        document.getElementById('cikisLinki').style.display = 'inline';
+        document.getElementById('girisLinki').style.display = 'none';
+        document.getElementById('kayitLinki').style.display = 'none';
+        document.getElementById('panelLinki').style.display = 'inline';
+    }
+};
 
         function formuGonder(event) {
             event.preventDefault();
