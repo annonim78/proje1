@@ -9,6 +9,12 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('./User');
 const tokenKontrol = require('./authMiddleware');
+function adminKontrol(req, res, next) {
+    if (req.kullanici.eposta !== 'treejudge@gmail.com') {
+        return res.status(403).json({ hata: 'Bu alana erişim yetkiniz yok' });
+    }
+    next();
+}
 app.use(express.json());
 app.use(express.static(__dirname));
 const mongoURI = process.env.MONGO_URI;
@@ -114,7 +120,14 @@ app.get('/tekliflerim', tokenKontrol, async (req, res) => {
         res.status(500).json({ hata: 'Teklifler getirilemedi' });
     }
 });
-
+app.get('/admin/tekliflerim', tokenKontrol, adminKontrol, async (req, res) => {
+    try {
+        const teklifler = await Teklif.find().sort({ tarih: -1 });
+        res.status(200).json(teklifler);
+    } catch (hata) {
+        res.status(500).json({ hata: 'Teklifler getirilemedi' });
+    }
+});
 app.listen(port, () => {
     console.log(`Express Sunucusu Aktif! Adres: http://localhost:${port}`);
 });
