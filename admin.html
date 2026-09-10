@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli - ÇAKIR Yazılım</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="wrap">
+            <a href="index.html" class="nav-logo">ÇAKIR<span>.</span>Yazılım</a>
+            <div class="nav-links">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="panelim.html">Panelim</a>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="wrap">
+            <h2 class="section-head">Admin Paneli — Gelen Tüm Teklifler</h2>
+            <div id="tumTeklifler" class="service-list"></div>
+        </div>
+    </section>
+
+    <script>
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        fetch('/admin/tekliflerim', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(response => response.json().then(data => ({ status: response.status, data })))
+        .then(({ status, data }) => {
+            const liste = document.getElementById('tumTeklifler');
+            if (status === 403) {
+                liste.innerHTML = '<p class="section-sub">Bu alana erişim yetkin yok.</p>';
+                return;
+            }
+            if (!data.length) {
+                liste.innerHTML = '<p class="section-sub">Henüz hiç teklif yok.</p>';
+                return;
+            }
+            liste.innerHTML = data.map(t => `
+                <div class="service-row">
+                    <div>
+                        <h3>${t.ad}</h3>
+                        <p>${t.eposta} — ${t.proje}</p>
+                    </div>
+                    <div class="service-tag">${new Date(t.tarih).toLocaleDateString('tr-TR')}</div>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
